@@ -1,0 +1,17 @@
+[33mcommit eabb7c73af64805b3cbafad1437f661f636d40b4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mAula-2[m[33m, [m[1;31morigin/Aula-2[m[33m)[m
+Author: Nicolas <Nico.belmonte2014@gmail.com>
+Date:   Thu Nov 20 19:44:57 2025 -0300
+
+    Cria uma entidade no banco de dados apartir do NinjaModel
+
+[33mcommit da09de8200c288bbcb2b8423c69c564e97690e5a[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: Nicolas <Nico.belmonte2014@gmail.com>
+Date:   Thu Nov 20 18:54:35 2025 -0300
+
+    Criado a controller aula 2
+
+[33mcommit 8d7e7658a9990980c3d4bf33a9dbbddef3282479[m
+Author: Nicolas <Nico.belmonte2014@gmail.com>
+Date:   Tue Nov 11 19:25:08 2025 -0300
+
+    first commit

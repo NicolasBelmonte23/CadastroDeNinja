@@ -6,30 +6,23 @@ import jakarta.persistence.*;
 //JPA - Java Persistence API
 @Entity
 @Table(name = "tb_cadastro")
+//TABLE - Cria a tabela de cadastro
 public class NinjaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String nome;
-    String email;
-    int idade;
+    private Long id;
+    private String nome;
+    private String email;
+    private int idade;
 
     public NinjaModel() {}
 
-    public NinjaModel(Long id, String nome, String email, int idade) {
-        this.id = id;
+    public NinjaModel( String nome, String email, int idade) {
+
         this.nome = nome;
         this.email = email;
         this.idade = idade;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
