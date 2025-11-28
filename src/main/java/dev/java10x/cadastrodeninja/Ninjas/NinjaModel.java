@@ -1,6 +1,9 @@
-package dev.java10x.cadastrodeninja;
+package dev.java10x.cadastrodeninja.Ninjas;
 
+import dev.java10x.cadastrodeninja.Missoes.MissoesModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 //Entity ele transforma uma classe em uma entidade do DB
 //JPA - Java Persistence API
@@ -10,23 +13,29 @@ public class NinjaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
     private String nome;
+
     private String email;
+
     private int idade;
+
+    // @ManyToOne um ninja tem uma unica missao
+    @ManyToOne
+    @JoinColumn(name = "missoes_id") // foreing key ou chave estrangeira
+    private MissoesModel missoes;
 
     public NinjaModel() {
 
     }
 
-    public NinjaModel(int id, String nome, String email, int idade) {
+    public NinjaModel(Long id, String nome, String email, int idade) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.idade = idade;
     }
-
-
 
     public String getNome() {
         return nome;
@@ -51,4 +60,7 @@ public class NinjaModel {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
+
+
 }
