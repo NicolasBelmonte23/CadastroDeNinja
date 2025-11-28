@@ -2,11 +2,15 @@ package dev.java10x.cadastrodeninja.Missoes;
 
 import dev.java10x.cadastrodeninja.Ninjas.NinjaModel;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_missao")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class MissoesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,37 +24,5 @@ public class MissoesModel {
     @OneToMany(mappedBy = "missoes")
     private List<NinjaModel> ninjas;
 
-
-
-    public MissoesModel(Long id, String nome, String ranking) {
-        this.id = id;
-        this.nome = nome;
-        this.ranking = ranking;
-
-    }
-
-    public MissoesModel() {
-
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getRanking() {
-        return ranking;
-    }
-    public void setRanking(String ranking) {
-        this.ranking = ranking;
-    }
 
 }
