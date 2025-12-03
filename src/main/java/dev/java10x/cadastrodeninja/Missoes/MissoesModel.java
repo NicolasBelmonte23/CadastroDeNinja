@@ -1,5 +1,6 @@
 package dev.java10x.cadastrodeninja.Missoes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.cadastrodeninja.Ninjas.NinjaModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,6 +23,7 @@ public class MissoesModel {
 
     // Uma missao pode ter varios ninjas
     @OneToMany(mappedBy = "missoes")
+    @JsonIgnore
     private List<NinjaModel> ninjas;
 
 
