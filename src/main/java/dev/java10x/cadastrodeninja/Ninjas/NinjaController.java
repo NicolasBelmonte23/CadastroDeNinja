@@ -26,9 +26,9 @@ public class NinjaController {
     }
 
     //Mostrar Ninjas por ID (READ)
-    @GetMapping("/listarID")
-    public String todosNinjasId(){
-        return "Todos os ninjas";
+    @GetMapping("/listar/{id}")
+    public NinjaModel listarNinjaId(@PathVariable Long id){
+        return ninjaService.listarNinjaId(id);
     }
 
     //Mostrar todos os ninjas (READ)
