@@ -3,9 +3,16 @@ package dev.java10x.cadastrodeninja.Ninjas;
 import jakarta.persistence.PostUpdate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("ninjas")
 public class NinjaController {
+
+    private NinjaService ninjaService;
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
+    }
 
     @GetMapping("/boasVindas")
     public String boasVindass(){
@@ -26,8 +33,8 @@ public class NinjaController {
 
     //Mostrar todos os ninjas (READ)
     @GetMapping("/listar")
-    public String todosNinjas(){
-        return "Todos os ninjas";
+    public List<NinjaModel> listarNinjas(){
+        return  ninjaService.listarNinjas() ;
     }
 
     //Alterar dados dos Ninjas (UPDATE)
