@@ -26,4 +26,9 @@ public class NinjaService {
         return ninjaId.orElse(null);
     }
 
+    //Adiconar ninjas na tabela
+    public NinjaModel criarNinja(NinjaModel ninja){
+        return ninjaRepository.save(ninja);
+    }
+
 }

@@ -24,4 +24,9 @@ public class MissoesService {
         Optional<MissoesModel> missoesId = missoesRepository.findById(id);
         return missoesId.orElse(null);
     }
+
+    //Adicionar ninjas na tabela
+    public  MissoesModel criarMissoes(MissoesModel missoes){
+        return missoesRepository.save(missoes);
+    }
 }

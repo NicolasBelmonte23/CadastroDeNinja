@@ -21,7 +21,7 @@ public class MissoesModel {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "rank")
+    @Column(name = "ranking")
     private String ranking;
 
     // Uma missao pode ter varios ninjas
