@@ -9,9 +9,11 @@ import java.util.Optional;
 public class NinjaService {
 
     private NinjaRepository ninjaRepository;
+    private NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
     //LISTAR TODOS OS NINJAS
@@ -27,8 +29,18 @@ public class NinjaService {
     }
 
     //Adiconar ninjas na tabela
-    public NinjaModel criarNinja(NinjaModel ninja){
-        return ninjaRepository.save(ninja);
+    public NinjaDTO criarNinja(NinjaDTO ninjaDTO){
+        NinjaModel ninja = new NinjaMapper().map(ninjaDTO);
+        ninja = ninjaRepository.save(ninja);
+        return ninjaMapper.mDefinições
+        Sair do modo tela cheia (fullscreen)
+
+
+
+        29:54
+        PIP
+
+        ap(ninja);
     }
 
     //Deletar o ninja - tem que ser um metodo void
