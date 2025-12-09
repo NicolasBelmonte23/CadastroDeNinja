@@ -16,6 +16,8 @@ public class NinjaDTO {
 
     private String nome;
 
+    private String imgUrl;
+
     private String email;
 
     private int idade;
