@@ -1,5 +1,8 @@
 package dev.java10x.cadastrodeninja.Missoes;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MissoesMapper {
 
     public MissoesModel map(MissoesDTO missoesDTO) {
