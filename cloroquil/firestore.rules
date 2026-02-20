@@ -1,0 +1,82 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function getUserRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && getUserRole() in ['ADMIN', 'OWNER'];
+    }
+
+    function isOwner() {
+      return isSignedIn() && getUserRole() == 'OWNER';
+    }
+
+    function isNotBlocked() {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.blocked != true;
+    }
+
+    // --- USERS ---
+    match /users/{uid} {
+      // Anyone signed in can read their own profile
+      allow read: if isSignedIn() && request.auth.uid == uid;
+
+      // Admins can read any profile (for admin panel)
+      allow read: if isAdmin();
+
+      // User can create their own profile on first login
+      allow create: if isSignedIn() && request.auth.uid == uid;
+
+      // User can update their own profile (name, address)
+      // but cannot change role or blocked status
+      allow update: if isSignedIn() && request.auth.uid == uid
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'blocked']);
+
+      // Admin can update any user (block/unblock)
+      // but only OWNER can change role
+      allow update: if isAdmin()
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']) || isOwner());
+    }
+
+    // --- PRODUCTS ---
+    match /products/{productId} {
+      // Anyone signed in and not blocked can read active products
+      allow read: if isSignedIn();
+
+      // Only admins can create/update/delete products
+      allow create, update, delete: if isAdmin();
+    }
+
+    // --- COUPONS ---
+    match /coupons/{couponId} {
+      // Signed-in users can read coupons (to validate and list "my coupons")
+      allow read: if isSignedIn() && isNotBlocked();
+
+      // Only admins can create/update/delete coupons
+      allow create, update, delete: if isAdmin();
+    }
+
+    // --- COUPON REDEMPTIONS ---
+    match /couponRedemptions/{redemptionId} {
+      // Users can read their own redemptions
+      allow read: if isSignedIn() && resource.data.uid == request.auth.uid;
+
+      // Admins can read any redemption
+      allow read: if isAdmin();
+
+      // Signed-in users can create/update their own redemptions (via transaction)
+      allow create: if isSignedIn() && isNotBlocked()
+        && request.resource.data.uid == request.auth.uid;
+
+      allow update: if isSignedIn() && isNotBlocked()
+        && resource.data.uid == request.auth.uid;
+    }
+  }
+}
